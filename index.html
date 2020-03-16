@@ -29,10 +29,10 @@
 
     btn.addEventListener("click", function() {
         var myRequest = new XMLHttpRequest();
-        myRequest.open('GET','https://api.icndb.com/jokes/random');
+        myRequest.open('GET','https://api.chucknorris.io/jokes/random');
         myRequest.onload = function() {
             var joke = JSON.parse(myRequest.responseText);
-            renderHTML(joke.value.joke);
+            renderHTML(joke.value);
         };
 
         myRequest.send();
@@ -45,10 +45,10 @@
 
     $(document).ready(function() {
         var myRequest = new XMLHttpRequest();
-        myRequest.open('GET','https://api.icndb.com/jokes/random');
+        myRequest.open('GET','https://api.chucknorris.io/jokes/random');
         myRequest.onload = function() {
             var joke = JSON.parse(myRequest.responseText);
-            renderHTML(joke.value.joke);
+            renderHTML(joke.value);
         };
 
         myRequest.send();
