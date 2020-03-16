@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Chorris Nuck</title>
+    <link type="text/css" rel="stylesheet" href="src/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="grid-container header">
+        <p>Norris</p>
+        <p>Chuck Norris God Damn It</p>
+        <img src="src/chuck_norris.png" alt="Picture">
+    </div>
+    <div class="grid-container main">
+        <div id="jokebox">
+            <p id="joketext"></p>
+        </div>
+    </div>
+    <button id="button">MORE!</button>
+</body>
+</html>
+
+<script>
+    var btn = document.getElementById("button");
+    var quoteContainer = document.getElementById("quote");
+
+    btn.addEventListener("click", function() {
+        var myRequest = new XMLHttpRequest();
+        myRequest.open('GET','https://api.icndb.com/jokes/random');
+        myRequest.onload = function() {
+            var joke = JSON.parse(myRequest.responseText);
+            renderHTML(joke.value.joke);
+        };
+
+        myRequest.send();
+
+    });
+
+    function renderHTML(data) {
+        document.getElementById("joketext").innerHTML=data;
+    };
+
+    $(document).ready(function() {
+        var myRequest = new XMLHttpRequest();
+        myRequest.open('GET','https://api.icndb.com/jokes/random');
+        myRequest.onload = function() {
+            var joke = JSON.parse(myRequest.responseText);
+            renderHTML(joke.value.joke);
+        };
+
+        myRequest.send();
+
+    });
+
+    $('#tweet').on('click', function() {
+        var twt = $("#quote").text();
+        makeTwitterPage('https://twitter.com/intent/tweet?text=' + encodeURIComponent(twt));
+    });
+    function makeTwitterPage(url){
+        window.open(url, 'Share', 'width=700, height=500, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=1');
+    };
+</script>
